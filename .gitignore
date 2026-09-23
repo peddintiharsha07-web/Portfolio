@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 __pycache__/
 *.py[cod]
 *.sqlite3
@@ -11,6 +12,9 @@ media/
 .DS_Store
 *.log
 =======
+=======
+
+>>>>>>> e33a36dc376077d7845ec5fc962ce2e516fb5d0e
 venv/
 .env
 __pycache__/
@@ -18,4 +22,7 @@ __pycache__/
 db.sqlite3
 media/
 staticfiles/
+<<<<<<< HEAD
 >>>>>>> ef6d6e2de74efea3ea8c5a4e30be2fb647bcc936
+=======
+>>>>>>> e33a36dc376077d7845ec5fc962ce2e516fb5d0e
