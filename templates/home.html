@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- ============ HERO ============ -->
+<section class="hero-section" id="home">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-visual" data-reveal>
+        <div class="hero-ring ring-1"></div>
+        <div class="hero-ring ring-2"></div>
+        <div class="hero-glow"></div>
+        <div class="hero-photo-wrap">
+          {% if profile.profile_image %}
+            <img src="{{ profile.profile_image.url }}" alt="{{ profile.full_name }}" class="hero-photo">
+          {% else %}
+            <div class="hero-photo hero-photo-placeholder"><i class="bi bi-person"></i></div>
+          {% endif %}
+        </div>
+        <div class="floating-chip chip-1"><i class="bi bi-code-slash"></i></div>
+        <div class="floating-chip chip-2"><i class="bi bi-palette2"></i></div>
+      </div>
+
+      <div class="hero-content" data-reveal data-reveal-delay="1">
+        {% if profile.available_for_work %}
+        <span class="status-badge"><span class="status-dot"></span> Available for work</span>
+        {% endif %}
+        <h1 class="hero-heading">Hi, I'm <span class="text-accent">{{ profile.full_name|default:"Your Name" }}</span></h1>
+        <p class="hero-role">&lt; {{ profile.role_title|default:"UI/UX Designer & Full Stack Developer" }} &gt;</p>
+        <p class="hero-intro">{{ profile.short_intro|default:"I design and build digital products end to end — from research and wireframes to a fully working, production-ready application." }}</p>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-num" data-count="{{ profile.projects_completed|default:0 }}">0</span>
+            <span class="stat-label">Projects Completed</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" data-count="{{ profile.years_experience|default:0 }}">0</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" data-count="{{ profile.happy_clients|default:0 }}">0</span>
+            <span class="stat-label">Happy Clients</span>
+          </div>
+        </div>
+
+        <div class="hero-ctas">
+          {% if profile.resume %}
+          <a href="{{ profile.resume.url }}" class="btn btn-outline-pill" download><i class="bi bi-download"></i> Download CV</a>
+          {% else %}
+          <a href="#contact" class="btn btn-outline-pill"><i class="bi bi-download"></i> Download CV</a>
+          {% endif %}
+          <a href="#contact" class="btn btn-primary-pill">Hire Me <i class="bi bi-arrow-up-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text" data-reveal>
+        <span class="section-badge">{{ profile.about_badge|default:"ABOUT ME" }}</span>
+        <h2 class="section-heading">{{ profile.about_heading|default:"Turning Ideas Into Digital Experiences" }}</h2>
+        <p class="about-desc">{{ profile.about_description|default:"I bridge design and engineering — turning research and wireframes into fast, accessible, production-ready products." }}</p>
+
+        <div class="social-icons about-socials">
+          {% for link in social_links %}
+          <a href="{{ link.url }}" target="_blank" rel="noopener" aria-label="{{ link.get_platform_display }}"><i class="bi {{ link.default_icon }}"></i></a>
+          {% endfor %}
+        </div>
+        <a href="#contact" class="btn btn-primary-pill mt-4">Let's Talk <i class="bi bi-arrow-up-right"></i></a>
+      </div>
+
+      <div class="about-visual" data-reveal data-reveal-delay="1">
+        <div class="about-card">
+          {% if profile.about_image %}
+            <img src="{{ profile.about_image.url }}" alt="About {{ profile.full_name }}">
+          {% else %}
+            <div class="about-card-placeholder"><i class="bi bi-person-workspace"></i></div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section class="skills-section" id="skills">
+  <div class="container text-center">
+    <span class="section-badge">SKILLS</span>
+    <h2 class="section-heading">My Skills</h2>
+    <p class="section-subtitle">Technologies and tools I work with to build meaningful digital experiences.</p>
+
+    <div class="skills-grid">
+      {% for skill in skills %}
+      <div class="skill-item" data-reveal data-reveal-delay="{{ forloop.counter0|divisibleby:3 }}">
+        <div class="skill-ring" data-percentage="{{ skill.percentage }}">
+          <svg viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="52"></circle>
+            <circle class="ring-fg" cx="60" cy="60" r="52" data-percentage="{{ skill.percentage }}"></circle>
+          </svg>
+          <div class="ring-center">
+            <i class="bi {{ skill.icon_class|default:'bi-stars' }}"></i>
+            <span class="ring-percent" data-target="{{ skill.percentage }}">0%</span>
+          </div>
+        </div>
+        <p class="skill-name">{{ skill.name }}</p>
+      </div>
+      {% empty %}
+      <p class="text-muted">Add skills from the Django Admin to display them here.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES / EXPERIENCE ============ -->
+<section class="services-section" id="services">
+  <div class="container text-center">
+    <span class="section-badge">WHAT I DO</span>
+    <h2 class="section-heading">Experience &amp; Services</h2>
+    <div class="services-grid">
+      {% for service in services %}
+      <div class="service-card" data-reveal data-reveal-delay="{{ forloop.counter0|divisibleby:3 }}">
+        <div class="service-icon"><i class="bi {{ service.icon_class }}"></i></div>
+        <h3 class="service-title">{{ service.title }}</h3>
+        <p class="service-desc">{{ service.description }}</p>
+      </div>
+      {% empty %}
+      <p class="text-muted">Add services from the Django Admin to display them here.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ============ CERTIFICATIONS ============ -->
+<section class="certificates-section" id="certificates">
+  <div class="container">
+    <div class="certs-grid">
+      <div class="certs-visual" data-reveal>
+        <div class="certs-frame">
+          <div class="certs-frame-ring"></div>
+          <div class="certs-photo"><i class="bi bi-mortarboard"></i></div>
+        </div>
+      </div>
+      <div class="certs-list-wrap" data-reveal data-reveal-delay="1">
+        <span class="section-badge">CREDENTIALS</span>
+        <h2 class="section-heading">My Certificates</h2>
+        <div class="certs-list">
+          {% for cert in certificates %}
+          <div class="cert-item">
+            <div class="cert-icon"><i class="bi {{ cert.icon_class|default:'bi-patch-check' }}"></i></div>
+            <div class="cert-body">
+              <h4>{{ cert.name }}</h4>
+              <p>{{ cert.issuing_organization }} &middot; {{ cert.year }}</p>
+            </div>
+            {% if cert.verification_url %}
+            <a href="{{ cert.verification_url }}" target="_blank" rel="noopener" class="cert-verify" aria-label="Verify {{ cert.name }}"><i class="bi bi-box-arrow-up-right"></i></a>
+            {% endif %}
+          </div>
+          {% empty %}
+          <p class="text-muted">Add certificates from the Django Admin to display them here.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section class="projects-section" id="projects">
+  <div class="container text-center">
+    <span class="section-badge">PORTFOLIO</span>
+    <h2 class="section-heading">My Creative Projects</h2>
+    <p class="section-subtitle">A selection of UI/UX and full-stack work — from concept to shipped product.</p>
+
+    <div class="projects-grid">
+      {% for project in projects %}
+      <div class="project-card" data-reveal data-reveal-delay="{{ forloop.counter0|divisibleby:3 }}">
+        <div class="project-thumb">
+          {% if project.thumbnail %}
+          <img src="{{ project.thumbnail.url }}" alt="{{ project.title }}" loading="lazy">
+          {% else %}
+          <div class="project-thumb-placeholder"><i class="bi bi-image"></i></div>
+          {% endif %}
+          {% if project.featured %}<span class="featured-tag">Featured</span>{% endif %}
+        </div>
+        <div class="project-body">
+          <h3>{{ project.title }}</h3>
+          <p>{{ project.short_description }}</p>
+          <div class="tech-tags">
+            {% for tech in project.tech_list %}<span class="tech-tag">{{ tech }}</span>{% endfor %}
+          </div>
+          <div class="project-actions">
+            <a href="{% url 'portfolio:project_detail' project.slug %}" class="btn btn-primary-pill btn-sm">View Case Study</a>
+            {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" rel="noopener" class="btn btn-outline-pill btn-sm">Live Demo</a>{% endif %}
+            {% if project.github_url %}<a href="{{ project.github_url }}" target="_blank" rel="noopener" class="icon-btn" aria-label="GitHub repository"><i class="bi bi-github"></i></a>{% endif %}
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p class="text-muted">Add projects from the Django Admin to display them here.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="contact-box" data-reveal>
+      <div class="contact-intro">
+        <span class="section-badge badge-on-dark">GET IN TOUCH</span>
+        <h2 class="section-heading heading-on-dark">Let's Create Something Great Together</h2>
+        <p class="contact-subtitle">Have a project in mind? Tell me about it — I typically reply within a day.</p>
+        {% if profile.email %}<p class="contact-email"><i class="bi bi-envelope"></i> {{ profile.email }}</p>{% endif %}
+      </div>
+
+      <form method="post" action="{% url 'portfolio:contact_submit' %}" class="contact-form">
+        {% csrf_token %}
+        <div class="row g-3">
+          <div class="col-md-6">{{ contact_form.name }}</div>
+          <div class="col-md-6">{{ contact_form.email }}</div>
+          <div class="col-12">{{ contact_form.subject }}</div>
+          <div class="col-12">{{ contact_form.message }}</div>
+        </div>
+        <button type="submit" class="btn btn-primary-pill mt-3">Send Message <i class="bi bi-send"></i></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

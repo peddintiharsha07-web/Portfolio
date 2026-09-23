@@ -1,0 +1,21 @@
+<<<<<<< HEAD
+__pycache__/
+*.py[cod]
+*.sqlite3
+.env
+venv/
+env/
+staticfiles/
+media/
+!media/.gitkeep
+.DS_Store
+*.log
+=======
+venv/
+.env
+__pycache__/
+*.pyc
+db.sqlite3
+media/
+staticfiles/
+>>>>>>> ef6d6e2de74efea3ea8c5a4e30be2fb647bcc936

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<section class="case-hero">
+  <div class="container">
+    <a href="{% url 'portfolio:home' %}#projects" class="back-link"><i class="bi bi-arrow-left"></i> Back to projects</a>
+    <span class="section-badge">{{ project.get_category_display }}</span>
+    <h1 class="case-title">{{ project.title }}</h1>
+    <p class="case-subtitle">{{ project.short_description }}</p>
+    <div class="tech-tags justify-content-center">
+      {% for tech in project.tech_list %}<span class="tech-tag">{{ tech }}</span>{% endfor %}
+    </div>
+    <div class="case-actions">
+      {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" rel="noopener" class="btn btn-primary-pill">Live Demo <i class="bi bi-box-arrow-up-right"></i></a>{% endif %}
+      {% if project.github_url %}<a href="{{ project.github_url }}" target="_blank" rel="noopener" class="btn btn-outline-pill">GitHub <i class="bi bi-github"></i></a>{% endif %}
+      {% if project.figma_url %}<a href="{{ project.figma_url }}" target="_blank" rel="noopener" class="btn btn-outline-pill">Figma <i class="bi bi-vector-pen"></i></a>{% endif %}
+      {% if project.prototype_url %}<a href="{{ project.prototype_url }}" target="_blank" rel="noopener" class="btn btn-outline-pill">Prototype <i class="bi bi-play-circle"></i></a>{% endif %}
+    </div>
+  </div>
+</section>
+
+{% if project.hero_image %}
+<section class="case-hero-image container">
+  <img src="{{ project.hero_image.url }}" alt="{{ project.title }}" loading="lazy">
+</section>
+{% endif %}
+
+<section class="case-content container">
+  {% if project.overview %}<div class="case-block" data-reveal><h3>Overview</h3><p>{{ project.overview|linebreaks }}</p></div>{% endif %}
+  {% if project.problem %}<div class="case-block" data-reveal><h3>Problem</h3><p>{{ project.problem|linebreaks }}</p></div>{% endif %}
+  {% if project.research %}<div class="case-block" data-reveal><h3>Research</h3><p>{{ project.research|linebreaks }}</p></div>{% endif %}
+  {% if project.user_personas %}<div class="case-block" data-reveal><h3>User Personas</h3><p>{{ project.user_personas|linebreaks }}</p></div>{% endif %}
+  {% if project.user_flow %}
+  <div class="case-block user-flow-block" data-reveal>
+    <h3>User Flow</h3>
+    <img 
+      src="{{ project.user_flow.url }}" 
+      alt="User Flow Diagram" 
+      class="case-study-image"
+    >
+  </div>
+{% endif %} 
+  {% if project.wireframes %}<div class="case-block" data-reveal><h3>Wireframes</h3><p>{{ project.wireframes|linebreaks }}</p></div>{% endif %}
+  {% if project.ui_design %}<div class="case-block" data-reveal><h3>UI Design</h3><p>{{ project.ui_design|linebreaks }}</p></div>{% endif %}
+  {% if project.design_system %}<div class="case-block" data-reveal><h3>Design System</h3><p>{{ project.design_system|linebreaks }}</p></div>{% endif %}
+  {% if project.development %}<div class="case-block" data-reveal><h3>Development</h3><p>{{ project.development|linebreaks }}</p></div>{% endif %}
+  {% if project.challenges %}<div class="case-block" data-reveal><h3>Challenges</h3><p>{{ project.challenges|linebreaks }}</p></div>{% endif %}
+  {% if project.solution %}<div class="case-block" data-reveal><h3>Solution</h3><p>{{ project.solution|linebreaks }}</p></div>{% endif %}
+  {% if project.final_result %}<div class="case-block" data-reveal><h3>Final Result</h3><p>{{ project.final_result|linebreaks }}</p></div>{% endif %}
+
+  {% if project.images.all %}
+  <div class="case-block" data-reveal>
+    <h3>Screenshots</h3>
+    <div class="case-gallery">
+      {% for img in project.images.all %}
+      <figure>
+        <img src="{{ img.image.url }}" alt="{{ img.caption|default:project.title }}" loading="lazy">
+        {% if img.caption %}<figcaption>{{ img.caption }}</figcaption>{% endif %}
+      </figure>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</section>
+
+{% if related_projects %}
+<section class="related-projects container">
+  <h3 class="mb-4">More Projects</h3>
+  <div class="projects-grid">
+    {% for p in related_projects %}
+    <div class="project-card" data-reveal>
+      <div class="project-thumb">
+        {% if p.thumbnail %}<img src="{{ p.thumbnail.url }}" alt="{{ p.title }}" loading="lazy">
+        {% else %}<div class="project-thumb-placeholder"><i class="bi bi-image"></i></div>{% endif %}
+      </div>
+      <div class="project-body">
+        <h3>{{ p.title }}</h3>
+        <p>{{ p.short_description }}</p>
+        <div class="project-actions">
+          <a href="{% url 'portfolio:project_detail' p.slug %}" class="btn btn-primary-pill btn-sm">View Case Study</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}
