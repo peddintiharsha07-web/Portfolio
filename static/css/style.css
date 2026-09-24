@@ -125,7 +125,33 @@ section{padding:90px 0;}
 .status-badge{display:inline-flex; align-items:center; gap:8px; background:var(--pink-2); color:var(--accent); font-weight:700; font-size:.82rem; padding:8px 16px; border-radius:var(--radius-pill); margin-bottom:20px;}
 .status-dot{width:8px; height:8px; border-radius:50%; background:#2ecc71; box-shadow:0 0 0 4px rgba(46,204,113,0.2);}
 .hero-heading{font-size:clamp(2.3rem, 4.4vw, 3.6rem); line-height:1.12; margin-bottom:14px;}
-.hero-role{font-family:'Sora',sans-serif; color:var(--accent); font-weight:600; font-size:1.05rem; margin-bottom:18px;}
+.hero-role{
+    font-family:'Sora',sans-serif;
+    color:var(--accent);
+    font-weight:600;
+    font-size:1.05rem;
+    margin-bottom:18px;
+}
+
+#role-text {
+    display: inline-block;
+}
+
+.typing-cursor {
+    display: inline-block;
+    margin-left: 4px;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 50% {
+        opacity: 1;
+    }
+
+    51%, 100% {
+        opacity: 0;
+    }
+}
 .hero-intro{color:var(--ink-soft); font-size:1.05rem; max-width:520px; margin-bottom:34px;}
 .hero-stats{display:flex; gap:40px; margin-bottom:36px; flex-wrap:wrap;}
 .stat-item{display:flex; flex-direction:column;}
@@ -175,7 +201,25 @@ section{padding:90px 0;}
 .certs-grid{display:grid; grid-template-columns:0.7fr 1.3fr; gap:60px; align-items:center;}
 .certs-frame{position:relative; width:100%; max-width:340px; aspect-ratio:1/1; margin:0 auto;}
 .certs-frame-ring{position:absolute; inset:-14px; border:2px dashed var(--pink); border-radius:50%; animation:float-rotate 30s linear infinite;}
-.certs-photo{position:absolute; inset:0; border-radius:50%; background:linear-gradient(160deg, var(--pink-2), var(--pink)); display:flex; align-items:center; justify-content:center; font-size:5rem; color:var(--accent); box-shadow:var(--shadow-lg);}
+.certs-photo {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(160deg, var(--pink-2), var(--pink));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+}
+
+.certs-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
 .certs-list{display:flex; flex-direction:column; gap:16px; margin-top:24px;}
 .cert-item{display:flex; align-items:center; gap:18px; background:var(--card); border:1px solid var(--border); border-radius:var(--radius-md); padding:18px 22px; transition:all .25s ease;}
 .cert-item:hover{box-shadow:var(--shadow-sm); border-color:transparent; transform:translateX(6px);}

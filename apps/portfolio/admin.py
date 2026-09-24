@@ -13,7 +13,7 @@ class ProfileAdmin(admin.ModelAdmin):
         ("Hero Section", {
             "fields": (
                 "full_name", "role_title", "tagline", "short_intro",
-                "available_for_work", "profile_image", "resume",
+                "available_for_work", "profile_image", "resume","graduation_image",
                 ("projects_completed", "years_experience", "happy_clients"),
             )
         }),

@@ -26,7 +26,7 @@
         <span class="status-badge"><span class="status-dot"></span> Available for work</span>
         {% endif %}
         <h1 class="hero-heading">Hi, I'm <span class="text-accent">{{ profile.full_name|default:"Your Name" }}</span></h1>
-        <p class="hero-role">&lt; {{ profile.role_title|default:"UI/UX Designer & Full Stack Developer" }} &gt;</p>
+        <p class="hero-role"> {{ profile.role_title|default:"UI/UX Designer & Full Stack Developer" }} </p>
         <p class="hero-intro">{{ profile.short_intro|default:"I design and build digital products end to end — from research and wireframes to a fully working, production-ready application." }}</p>
 
         <div class="hero-stats">
@@ -142,7 +142,13 @@
       <div class="certs-visual" data-reveal>
         <div class="certs-frame">
           <div class="certs-frame-ring"></div>
-          <div class="certs-photo"><i class="bi bi-mortarboard"></i></div>
+          <div class="certs-photo">
+    {% if profile.graduation_image %}
+        <img src="{{ profile.graduation_image.url }}" alt="Graduation">
+    {% else %}
+        <i class="bi bi-mortarboard"></i>
+    {% endif %}
+</div>
         </div>
       </div>
       <div class="certs-list-wrap" data-reveal data-reveal-delay="1">

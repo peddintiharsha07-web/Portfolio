@@ -22,11 +22,10 @@ class Profile(models.Model):
     tagline = models.CharField(max_length=255, blank=True)
     short_intro = models.TextField(help_text="Short paragraph shown in the hero section.")
     available_for_work = models.BooleanField(default=True)
-
     profile_image = models.ImageField(upload_to="profile/", blank=True, null=True)
     about_image = models.ImageField(upload_to="profile/", blank=True, null=True)
     resume = models.FileField(upload_to="resume/", blank=True, null=True)
-
+    graduation_image = models.ImageField(upload_to="profile/", blank =True,null= True)
     projects_completed = models.PositiveIntegerField(default=0)
     years_experience = models.PositiveIntegerField(default=0)
     happy_clients = models.PositiveIntegerField(default=0)
@@ -162,6 +161,7 @@ class Education(models.Model):
 
 
 class Certificate(models.Model):
+    
     name = models.CharField(max_length=200)
     issuing_organization = models.CharField(max_length=150)
     year = models.PositiveIntegerField()
