@@ -193,7 +193,7 @@ USE_TZ = True
 # Static files
 # ---------------------------------------------------------------------------
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
     BASE_DIR / "static"
@@ -219,7 +219,7 @@ STORAGES = {
 # Media files
 # ---------------------------------------------------------------------------
 
-MEDIA_URL = "media/"
+MEDIA_URL = "/media/"
 
 MEDIA_ROOT = BASE_DIR / "media"
 
@@ -240,8 +240,7 @@ EMAIL_BACKEND = config(
     default=(
         "django.core.mail.backends.console.EmailBackend"
         if DEBUG
-        else
-        "django.core.mail.backends.smtp.EmailBackend"
+        else "django.core.mail.backends.smtp.EmailBackend"
     )
 )
 
