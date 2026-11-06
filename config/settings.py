@@ -64,9 +64,11 @@ TEMPLATES = [{
 WSGI_APPLICATION = "config.wsgi.application"
 
 # Local development uses SQLite. Vercel uses Neon through DATABASE_URL.DATABASE_URL = os.environ.get("DATABASE_URL")
-
-# Database Configuration
 DATABASE_URL = os.environ.get("DATABASE_URL")
+
+if os.environ.get("VERCEL") == "1":
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL missing in Vercel")
 
 if DATABASE_URL:
     DATABASES = {
@@ -76,10 +78,6 @@ if DATABASE_URL:
             ssl_require=True,
         )
     }
-elif os.environ.get("VERCEL"):
-    raise ValueError(
-        "DATABASE_URL is missing in Vercel Environment Variables"
-    )
 else:
     DATABASES = {
         "default": {
@@ -87,7 +85,6 @@ else:
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
-
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "Asia/Kolkata"
 USE_I18N = True
