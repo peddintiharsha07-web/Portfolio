@@ -5,7 +5,7 @@ from django.urls import reverse
 class SiteSettings(models.Model):
     """Single record that controls all the text, images and theme of the site."""
     MODES = [("dark", "Dark"), ("light", "Light")]
-    COLORS = [("red", "Crimson Red"), ("blue", "Ocean Blue"), ("green", "Emerald Green"),
+    COLORS = [("red", "Crimson Red"), ("blue", "Ocean Blue"), ("green", "Emerald Green"), ("yellow", "Sunshine Yellow"),
               ("purple", "Royal Purple"), ("orange", "Sunset Orange"), ("pink", "Rose Pink")]
 
     # Branding / theme
