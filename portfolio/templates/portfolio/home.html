@@ -1,0 +1,145 @@
+{% extends "portfolio/base.html" %}
+{% block content %}
+
+<!-- HERO -->
+<section class="hero container reveal" id="home">
+  <div class="ring-wrap">
+    {% if s.hero_image %}<img src="{{ s.hero_image.url }}" alt="{{ s.name }}">{% else %}<div class="img-ph"><i class="bi bi-person-fill"></i></div>{% endif %}
+  </div>
+  <div class="hero-text">
+    {% if s.availability_text %}<span class="badge"><i class="dot"></i>{{ s.availability_text }}</span>{% endif %}
+    <h1>Hi, I'm <span class="accent">{{ s.name }}</span></h1>
+    <p class="role">&lt;<span id="typed" data-words="{{ typing_words|join:'|' }}">{{ typing_words.0 }}</span><span class="cursor">|</span> /&gt;</p>
+    <p class="muted">{{ s.intro }}</p>
+    <div class="stats">
+      <div><b>{{ s.years_experience }}</b><span>Years Experience</span></div>
+      <div><b>{{ s.projects_done }}</b><span>Projects Done</span></div>
+      <div><b>{{ s.happy_clients }}</b><span>Happy Clients</span></div>
+    </div>
+    <div class="btn-row">
+      {% if s.cv_file %}<a href="{{ s.cv_file.url }}" class="btn btn-primary" download><i class="bi bi-download"></i> Download CV</a>{% endif %}
+      <a href="#contact" class="btn btn-outline"><i class="bi bi-envelope"></i> Hire Me</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+{% if s.show_about %}
+<section class="about container reveal" id="about">
+  <div>
+    <span class="badge"><i class="dot"></i>About Me</span>
+    <h2 class="big">{{ s.about_title }}<br><span class="accent">{{ s.about_highlight }}</span></h2>
+    <p class="muted">{{ s.about_text|linebreaksbr }}</p>
+    <div class="socials">
+      {% for l in socials %}<a href="{{ l.url }}" target="_blank" rel="noopener" aria-label="{{ l.platform }}"><i class="bi bi-{{ l.platform }}"></i></a>{% endfor %}
+    </div>
+    <a href="#contact" class="btn btn-primary">Let's Talk <i class="bi bi-arrow-right"></i></a>
+  </div>
+  <div class="about-art">
+    <span class="float f1"><i class="bi bi-code-slash"></i></span><span class="float f2"><i class="bi bi-stars"></i></span><span class="float f3"><i class="bi bi-plus-lg"></i></span>
+    <div class="blob">
+      {% if s.about_image %}<img src="{{ s.about_image.url }}" alt="About {{ s.name }}">{% else %}<div class="img-ph"><i class="bi bi-person-workspace"></i></div>{% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- SKILLS -->
+{% if skills and s.show_skills %}
+<section class="container reveal" id="skills">
+  <div class="center">
+    <span class="badge"><i class="dot"></i>Expertise</span>
+    <h2 class="title">{{ s.skills_title }} <span class="accent">{{ s.skills_highlight }}</span></h2>
+    <p class="muted">{{ s.skills_subtitle }}</p>
+  </div>
+  <div class="skills-row">
+    <div class="skills-art">{% if s.skills_image %}<img src="{{ s.skills_image.url }}" alt="">{% else %}<div class="img-ph"><i class="bi bi-laptop"></i></div>{% endif %}</div>
+    <div class="tiles">
+      {% for k in skills %}
+      <div class="tile" style="--c:{{ k.color }}">
+        <span class="tile-ic">{% if k.icon_image %}<img src="{{ k.icon_image.url }}" alt="">{% else %}<i class="bi {{ k.icon }}"></i>{% endif %}</span>
+        <b>{{ k.name }}</b><strong>{{ k.percent }}%</strong>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- CERTIFICATES -->
+{% if certificates and s.show_certificates %}
+<section class="certs container reveal" id="certificates">
+  <div class="ring-wrap sm">
+    {% if s.keep_learning_text %}<span class="keep">{{ s.keep_learning_text }}</span>{% endif %}
+    {% if s.certificate_image %}<img src="{{ s.certificate_image.url }}" alt="Certificates">{% else %}<div class="img-ph"><i class="bi bi-mortarboard-fill"></i></div>{% endif %}
+  </div>
+  <div>
+    <span class="badge"><i class="dot"></i>Certifications</span>
+    <h2 class="title left">{{ s.certificates_title }} <span class="accent">{{ s.certificates_highlight }}</span></h2>
+    <p class="muted cert-sub">{{ s.certificates_subtitle }}</p>
+    <div class="cert-panel">
+      <button class="cert-arrow l" id="cPrev" aria-label="Previous"><i class="bi bi-chevron-left"></i></button>
+      <div class="cert-slider" id="certSlider">
+        {% for c in certificates %}
+        <a class="cert-card" {% if c.verify_url %}href="{{ c.verify_url }}" target="_blank" rel="noopener"{% endif %}>
+          <span class="cert-logo">{% if c.logo %}<img src="{{ c.logo.url }}" alt="">{% else %}<i class="bi {{ c.logo_icon }}"></i>{% endif %}</span>
+          <b>{{ c.issuer }}</b><small>{{ c.title }}</small><em>{{ c.status }}</em>
+        </a>
+        {% endfor %}
+      </div>
+      <button class="cert-arrow r" id="cNext" aria-label="Next"><i class="bi bi-chevron-right"></i></button>
+    </div>
+    <div class="dots" id="certDots"></div>
+  </div>
+</section>
+{% endif %}
+
+<!-- PROJECTS -->
+{% if projects and s.show_projects %}
+<section class="container reveal" id="projects">
+  <div class="row-between">
+    <div>{% if s.projects_label %}<span class="label">{{ s.projects_label }}</span>{% endif %}
+      <h2 class="title left">{{ s.projects_title }} <span class="accent">{{ s.projects_highlight }}</span></h2></div>
+    <div class="arrows"><button class="icon-btn" id="prev" aria-label="Previous"><i class="bi bi-chevron-left"></i></button>
+      <button class="icon-btn" id="next" aria-label="Next"><i class="bi bi-chevron-right"></i></button></div>
+  </div>
+  <div class="slider" id="slider">
+    {% for p in projects %}
+    <a class="card project" href="{{ p.get_absolute_url }}">
+      {% if p.image %}<img src="{{ p.image.url }}" alt="{{ p.title }}" loading="lazy">{% else %}<div class="img-ph wide"><i class="bi bi-window-stack"></i></div>{% endif %}
+      <h3>{{ p.title }}</h3><p>{{ p.description }}</p><span class="more">View case study <i class="bi bi-arrow-right"></i></span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- SERVICES -->
+{% if services and s.show_services %}
+<section class="container center reveal" id="services">
+  {% if s.services_badge %}<span class="badge"><i class="dot"></i>{{ s.services_badge }}</span>{% endif %}
+  <h2 class="title">{{ s.services_title }} <span class="accent">{{ s.services_highlight }}</span></h2>
+  <p class="muted">{{ s.services_subtitle }}</p>
+  <div class="services">
+    {% for v in services %}<div class="card service"><i class="bi {{ v.icon }}"></i><h3>{{ v.title }}</h3><p>{{ v.description }}</p></div>{% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- CONTACT -->
+<section class="container reveal" id="contact">
+  <div class="contact">
+    <div>
+      <h2 class="big sm">{{ s.contact_title }} <span class="accent">{{ s.contact_highlight }}</span></h2>
+      <p>{{ s.contact_text }}</p>
+      <a href="mailto:{{ s.email }}" class="btn btn-primary"><i class="bi bi-send"></i> Contact Me <i class="bi bi-arrow-right"></i></a>
+    </div>
+    <ul class="info">
+      <li><i class="bi bi-envelope"></i><a href="mailto:{{ s.email }}">{{ s.email }}</a></li>
+      {% if s.phone %}<li><i class="bi bi-telephone-fill"></i><a href="tel:{{ s.phone }}">{{ s.phone }}</a></li>{% endif %}
+      {% if s.location %}<li><i class="bi bi-geo-alt-fill"></i><span>{{ s.location }}</span></li>{% endif %}
+    </ul>
+    {% if s.contact_image %}<img class="contact-img" src="{{ s.contact_image.url }}" alt="">{% endif %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,12 @@
+<footer class="footer">
+  <div class="container foot-grid">
+    <div class="foot-brand"><a href="{% url 'home' %}#home" class="logo">{{ s.logo_text }}</a>
+      <div><b class="accent">{{ s.name }}</b><br><small>{{ s.role }}</small></div></div>
+    <div><h4>Quick Links</h4>
+      <div class="links"><a href="{% url 'home' %}#home">Home</a><a href="{% url 'home' %}#certificates">Certificates</a><a href="{% url 'home' %}#about">About</a><a href="{% url 'home' %}#projects">Projects</a><a href="{% url 'home' %}#skills">Skills</a><a href="{% url 'home' %}#contact">Contact</a></div></div>
+    <div><h4>Follow Me</h4>
+      <div class="socials">{% for l in socials %}<a href="{{ l.url }}" target="_blank" rel="noopener" aria-label="{{ l.platform }}"><i class="bi bi-{{ l.platform }}"></i></a>{% endfor %}</div></div>
+    <a href="#top" class="btn btn-primary to-top">Back to Top <i class="bi bi-arrow-up"></i></a>
+  </div>
+  <p class="copy">© {% now "Y" %} <span class="accent">{{ s.name }}</span>. All rights reserved. {{ s.footer_text }}</p>
+</footer>

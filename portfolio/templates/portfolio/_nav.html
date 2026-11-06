@@ -1,0 +1,30 @@
+{% url 'home' as home_url %}
+<header class="nav" id="top">
+  <a href="{{ home_url }}#home" class="logo">{{ s.logo_text }}</a>
+  <nav class="menu" id="menu">
+    <a href="{{ home_url }}#home" class="active">Home</a>
+    {% if s.show_about %}<a href="{{ home_url }}#about">About</a>{% endif %}
+    {% if s.show_skills %}<a href="{{ home_url }}#skills">Skills</a>{% endif %}
+    {% if s.show_certificates %}<a href="{{ home_url }}#certificates">Certificates</a>{% endif %}
+    {% if s.show_projects %}<a href="{{ home_url }}#projects">Projects</a>{% endif %}
+    <a href="{{ home_url }}#contact">Contact</a>
+    <a href="{{ home_url }}#contact" class="btn btn-primary menu-cta">Hire Me <i class="bi bi-send"></i></a>
+  </nav>
+  <div class="nav-actions">
+    {% if s.show_mode_toggle %}<button class="icon-btn" id="modeToggle" aria-label="Toggle light/dark"><i class="bi bi-sun-fill"></i></button>{% endif %}
+    {% if user.is_staff %}
+      <button class="icon-btn" id="paletteBtn" aria-label="Site colour (admin only)" title="Site colour (admin only)"><i class="bi bi-palette-fill"></i></button>
+      <a class="icon-btn" href="/admin/" title="Open admin"><i class="bi bi-gear-fill"></i></a>
+    {% endif %}
+    <a href="{{ home_url }}#contact" class="btn btn-primary nav-cta">Hire Me <i class="bi bi-send"></i></a>
+    <button class="icon-btn burger" id="burger" aria-label="Open navigation menu" aria-controls="menu" aria-expanded="false"><i class="bi bi-list"></i></button>
+  </div>
+  {% if user.is_staff %}
+  <div class="palette" id="palette">
+    <p>Site colour <small>(saved for all visitors)</small></p>
+    <div class="swatches">
+      {% for key, label in color_choices %}<button class="swatch" data-color="{{ key }}" title="{{ label }}" aria-label="{{ label }}"></button>{% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</header>

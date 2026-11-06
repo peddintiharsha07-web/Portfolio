@@ -1,0 +1,108 @@
+{% extends "portfolio/base.html" %}
+{% block title %}{{ p.title }} | {{ s.name }}{% endblock %}
+{% block content %}
+<section class="container pd-head">
+  <a href="{% url 'home' %}#projects" class="back"><i class="bi bi-arrow-left"></i> All projects</a>
+  <span class="badge"><i class="dot"></i>Case study</span>
+  <h1 class="big">{{ p.title }}</h1>
+  {% if p.description %}<p class="muted lead">{{ p.description }}</p>{% endif %}
+  <div class="meta">
+    {% if p.role_in_project %}<div><small>Role</small><b>{{ p.role_in_project }}</b></div>{% endif %}
+    {% if p.year %}<div><small>Year</small><b>{{ p.year }}</b></div>{% endif %}
+    {% if p.tech_list %}<div><small>Tech stack</small><span class="chips">{% for t in p.tech_list %}<em>{{ t }}</em>{% endfor %}</span></div>{% endif %}
+  </div>
+  <div class="btn-row">
+    {% if p.link %}<a href="{{ p.link }}" target="_blank" rel="noopener" class="btn btn-primary"><i class="bi bi-box-arrow-up-right"></i> Live demo</a>{% endif %}
+    {% if p.github_url %}<a href="{{ p.github_url }}" target="_blank" rel="noopener" class="btn btn-outline"><i class="bi bi-github"></i> Source code</a>{% endif %}
+    {% if user.is_staff %}<a href="/admin/portfolio/project/{{ p.pk }}/change/" class="btn btn-outline"><i class="bi bi-pencil"></i> Edit</a>{% endif %}
+  </div>
+  {% if p.image %}<img class="cover" src="{{ p.image.url }}" alt="{{ p.title }}">{% endif %}
+</section>
+
+{% if p.problem_statement or p.solution %}
+<section class="container two-col">
+  {% if p.problem_statement %}<div class="card pad"><h3><i class="bi bi-exclamation-octagon"></i> Problem statement</h3><p class="muted">{{ p.problem_statement|linebreaksbr }}</p></div>{% endif %}
+  {% if p.solution %}<div class="card pad"><h3><i class="bi bi-lightbulb"></i> Solution</h3><p class="muted">{{ p.solution|linebreaksbr }}</p></div>{% endif %}
+</section>
+{% endif %}
+
+{% if features %}
+<section class="container center">
+  <h2 class="title">Key <span class="accent">Features</span></h2>
+  <div class="services">
+    {% for f in features %}<div class="card service"><i class="bi {{ f.icon }}"></i><h3>{{ f.title }}</h3><p>{{ f.description }}</p></div>{% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if flow %}
+<section class="container center">
+  <h2 class="title">User Flow <span class="accent">Diagram</span></h2>
+  <p class="muted">How a user moves through the product, step by step.</p>
+  <div class="flow">
+    {% for st in flow %}
+      {% if not forloop.first %}<div class="flow-arrow"><span>{{ st.arrow_label }}</span><i class="bi bi-arrow-right"></i></div>{% endif %}
+      <div class="flow-node {{ st.step_type }}">
+        {% if st.step_type == "decision" %}<i class="bi bi-question-diamond-fill"></i>{% endif %}
+        <b>{{ st.title }}</b>{% if st.description %}<small>{{ st.description }}</small>{% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if categories %}
+<section class="container">
+  <h2 class="title center">Project <span class="accent">Details</span></h2>
+  <div class="docs">
+    {% for c in categories %}
+    <article class="card doc">
+      <header><span class="num">{{ c.number|default:forloop.counter }}</span><h3>{{ c.title }}</h3></header>
+      <ul>
+        {% for it in c.item_list %}<li><i class="bi bi-check2-circle"></i><div><b>{{ it.title }}</b>{% if it.desc %}<small>{{ it.desc }}</small>{% endif %}</div></li>{% endfor %}
+      </ul>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if gallery %}
+<section class="container center">
+  <h2 class="title"><span class="accent">Screenshots</span></h2>
+  <div class="gallery">
+    {% for g in gallery %}<figure class="card"><img src="{{ g.image.url }}" alt="{{ g.caption }}" loading="lazy">{% if g.caption %}<figcaption>{{ g.caption }}</figcaption>{% endif %}</figure>{% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if p.outcome %}
+<section class="container"><div class="card pad"><h3><i class="bi bi-trophy"></i> Outcome</h3><p class="muted">{{ p.outcome|linebreaksbr }}</p></div></section>
+{% endif %}
+
+<section class="container project-navigation" aria-label="Explore other projects">
+  <div class="center project-navigation-heading">
+    <span class="badge"><i class="dot"></i> Keep exploring</span>
+    <h2 class="title">More <span class="accent">Projects</span></h2>
+  </div>
+  <div class="project-navigation-grid">
+    {% if prev %}
+    <a class="card project-nav-card" href="{{ prev.get_absolute_url }}" aria-label="Previous project: {{ prev.title }}">
+      <span class="project-nav-label"><i class="bi bi-arrow-left"></i> Previous project</span>
+      {% if prev.image %}<img src="{{ prev.image.url }}" alt="{{ prev.title }}" loading="lazy">{% else %}<span class="img-ph"><i class="bi bi-window-stack"></i></span>{% endif %}
+      <span class="project-nav-title">{{ prev.title }}</span>
+      {% if prev.description %}<span class="project-nav-description">{{ prev.description }}</span>{% endif %}
+    </a>
+    {% endif %}
+    {% if next %}
+    <a class="card project-nav-card next" href="{{ next.get_absolute_url }}" aria-label="Next project: {{ next.title }}">
+      <span class="project-nav-label">Next project <i class="bi bi-arrow-right"></i></span>
+      {% if next.image %}<img src="{{ next.image.url }}" alt="{{ next.title }}" loading="lazy">{% else %}<span class="img-ph"><i class="bi bi-window-stack"></i></span>{% endif %}
+      <span class="project-nav-title">{{ next.title }}</span>
+      {% if next.description %}<span class="project-nav-description">{{ next.description }}</span>{% endif %}
+    </a>
+    {% endif %}
+  </div>
+  <div class="center all-projects-link"><a class="btn btn-outline" href="{% url 'home' %}#projects"><i class="bi bi-grid"></i> View all projects</a></div>
+</section>
+{% endblock %}
