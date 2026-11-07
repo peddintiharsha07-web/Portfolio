@@ -387,20 +387,22 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent2); outli
   .float { animation: none !important; }
   .project, .project-nav-card, .tile, .service { transition: none !important; }
 }
-/* ===== Desktop Certificates Overflow Fix ===== */
-
-/* ===== Desktop Certificates Width Adjustment ===== */
+/* ===== Certificates Desktop Alignment Fix ===== */
 
 @media (min-width: 961px) {
 
     .certs {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
-        width: calc(100% - 30px);
-        max-width: 100%;
+        grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+
+        width: min(1150px, 92%);
+        max-width: 1150px;
         min-width: 0;
+
         margin-inline: auto;
         box-sizing: border-box;
+
+        gap: clamp(1.5rem, 4vw, 3rem);
     }
 
     .certs > * {
@@ -412,14 +414,17 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent2); outli
         width: 100%;
         min-width: 0;
         max-width: 100%;
+        overflow: hidden;
         box-sizing: border-box;
     }
 
     .cert-slider {
+        display: flex;
         width: 100%;
         min-width: 0;
         max-width: 100%;
         overflow-x: auto;
+        overflow-y: hidden;
         box-sizing: border-box;
     }
 
