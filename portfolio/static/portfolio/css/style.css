@@ -412,9 +412,11 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent2); outli
 
     .cert-panel {
         width: 100%;
-        min-width: 0;
         max-width: 100%;
-        overflow: hidden;
+        min-width: 0;
+        position: relative;
+        overflow: visible;
+        transform: translateY(-20px);
         box-sizing: border-box;
     }
 
