@@ -575,32 +575,4 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent2); outli
         height: 36px;
     }
 }
-/* ===== Mobile Navbar Full Width Fix ===== */
-
-@media (max-width: 960px) {
-
-    .nav {
-        width: 100% !important;
-        max-width: 100% !important;
-        min-width: 100%;
-        margin: 0 !important;
-        left: 0;
-        right: 0;
-        box-sizing: border-box;
-        background: var(--bg);
-    }
-
-    header {
-        width: 100%;
-        max-width: 100%;
-        margin: 0;
-        box-sizing: border-box;
-    }
-
-    .nav-actions {
-        margin-left: auto;
-        flex-shrink: 0;
-    }
-
-}
 
