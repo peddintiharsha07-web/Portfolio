@@ -389,33 +389,36 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent2); outli
 }
 /* ===== Desktop Certificates Overflow Fix ===== */
 
+/* ===== Desktop Certificates Width Adjustment ===== */
+
 @media (min-width: 961px) {
 
     .certs {
         display: grid;
         grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
-        width: 75%;
-        max-width: 75%;
+        width: calc(100% - 30px);
+        max-width: 100%;
         min-width: 0;
+        margin-inline: auto;
         box-sizing: border-box;
     }
 
     .certs > * {
         min-width: 0;
-        max-width: 75%;
+        max-width: 100%;
     }
 
     .cert-panel {
-        width: 75%;
+        width: 100%;
         min-width: 0;
         max-width: 100%;
         box-sizing: border-box;
     }
 
     .cert-slider {
-        width: 75%;
+        width: 100%;
         min-width: 0;
-        max-width: 75%;
+        max-width: 100%;
         overflow-x: auto;
         box-sizing: border-box;
     }
