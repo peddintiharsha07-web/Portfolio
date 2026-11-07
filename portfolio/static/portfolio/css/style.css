@@ -80,12 +80,45 @@ img{max-width:100%;display:block}a{color:inherit;text-decoration:none}ul{list-st
 .skill strong{position:absolute;top:44px;font-size:1.3rem}
 
 /* certificates */
-.cert-list{display:grid;gap:1.2rem;margin-top:1.4rem}
-.cert-list li{display:flex;align-items:center;gap:1rem}
-.cert-ic{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 18%,transparent);border:1px solid var(--line);color:var(--accent2);flex:none}
-.cert-list b{display:block;font-size:.95rem}.cert-list small{color:var(--muted)}
-.cert-meta{margin-left:auto;text-align:right;display:flex;flex-direction:column;font-size:.75rem}
-.cert-meta a{color:#22c55e;font-weight:600}
+/* Certificates section */
+.certificates-section {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Certificate cards container */
+.certificates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+/* Individual certificate card */
+.certificate-card {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .certificates-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .certificates-grid {
+        grid-template-columns: 1fr;
+    }
+}
 
 /* projects */
 .row-between{display:flex;justify-content:space-between;align-items:center;gap:1rem}.arrows{display:flex;gap:.5rem}
