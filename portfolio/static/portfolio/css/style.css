@@ -435,3 +435,145 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent2); outli
     }
 
 }
+/* ===== FINAL NAVBAR RESPONSIVE FIX ===== */
+
+/* Desktop */
+.nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: .7rem 4%;
+    box-sizing: border-box;
+}
+
+.logo {
+    flex-shrink: 0;
+    margin: 0;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: .5rem;
+    margin: 0;
+    padding: 0;
+    position: static;
+}
+
+.menu a {
+    white-space: nowrap;
+    padding: .55rem .9rem;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .6rem;
+    flex-shrink: 0;
+}
+
+.burger {
+    display: none;
+}
+
+.menu-cta {
+    display: none;
+}
+
+/* Tablet and Mobile */
+@media (max-width: 960px) {
+
+    .nav {
+        min-height: 68px;
+        padding: .65rem 4%;
+        gap: .7rem;
+    }
+
+    .burger {
+        display: grid;
+        flex: 0 0 40px;
+        width: 40px;
+        height: 40px;
+        place-items: center;
+    }
+
+    .nav-cta {
+        display: none;
+    }
+
+    .menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: .35rem;
+        margin: 0;
+        padding: 1rem 4%;
+        background: var(--bg);
+        border-bottom: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        z-index: 100;
+        box-sizing: border-box;
+        max-height: calc(100dvh - 68px);
+        overflow-y: auto;
+    }
+
+    .menu.open {
+        display: flex;
+    }
+
+    .menu a {
+        width: 100%;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        padding: .65rem 1rem;
+        border-radius: 12px;
+        white-space: normal;
+    }
+
+    .menu-cta {
+        display: inline-flex;
+        justify-content: center;
+        width: 100%;
+        margin-top: .5rem;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+
+    .nav {
+        padding-inline: 12px;
+        gap: .4rem;
+    }
+
+    .logo {
+        font-size: 1.4rem;
+    }
+
+    .nav-actions {
+        gap: .3rem;
+    }
+
+    .icon-btn {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+
