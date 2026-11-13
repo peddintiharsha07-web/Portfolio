@@ -553,26 +553,29 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent2); outli
         margin-top: .5rem;
     }
 }
-
-/* Small mobile */
-@media (max-width: 440px) {
-
-    .nav {
-        padding-inline: 12px;
-        gap: .4rem;
+@media screen and (max-width: 440px) {
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
     }
 
-    .logo {
-        font-size: 1.4rem;
+    * {
+        box-sizing: border-box;
     }
 
-    .nav-actions {
-        gap: .3rem;
+    .container,
+    .hero,
+    main,
+    section {
+        width: 100%;
+        max-width: 100%;
     }
 
-    .icon-btn {
-        width: 36px;
-        height: 36px;
+    img {
+        max-width: 100%;
+        height: auto;
     }
 }
 
