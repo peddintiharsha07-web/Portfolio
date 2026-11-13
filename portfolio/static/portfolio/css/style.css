@@ -553,28 +553,35 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent2); outli
         margin-top: .5rem;
     }
 }
+/* Mobile Responsive Fix */
 @media screen and (max-width: 440px) {
-    html,
-    body {
-        width: 90%;
-        max-width: 90%;
-        overflow-x: hidden;
-    }
 
     * {
         box-sizing: border-box;
     }
 
+    html, body {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        overflow-x: hidden;
+    }
+
     .container,
-    .hero,
     main,
-    section {
-        width: 90%;
-        max-width: 90%;
+    section,
+    .hero {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .container {
+        padding-left: 16px;
+        padding-right: 16px;
     }
 
     img {
-        max-width: 90%;
+        max-width: 100%;
         height: auto;
     }
 }
