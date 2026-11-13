@@ -556,8 +556,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent2); outli
 @media screen and (max-width: 440px) {
     html,
     body {
-        width: 100%;
-        max-width: 100%;
+        width: 90%;
+        max-width: 90%;
         overflow-x: hidden;
     }
 
@@ -569,12 +569,12 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent2); outli
     .hero,
     main,
     section {
-        width: 100%;
-        max-width: 100%;
+        width: 90%;
+        max-width: 90%;
     }
 
     img {
-        max-width: 100%;
+        max-width: 90%;
         height: auto;
     }
 }
