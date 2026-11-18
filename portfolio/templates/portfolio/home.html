@@ -9,7 +9,7 @@
   <div class="hero-text">
     {% if s.availability_text %}<span class="badge"><i class="dot"></i>{{ s.availability_text }}</span>{% endif %}
     <h1>Hi, I'm <span class="accent">{{ s.name }}</span></h1>
-    <p class="role">&lt;<span id="typed" data-words="{{ typing_words|join:'|' }}">{{ typing_words.0 }}</span><span class="cursor">|</span> /&gt;</p>
+    <p class="role"><span id="typed" data-words="{{ typing_words|join:'|' }}">{{ typing_words.0 }}</span><span class="cursor">|</span></p>
     <p class="muted">{{ s.intro }}</p>
     <div class="stats">
       <div><b>{{ s.years_experience }}</b><span>Years Experience</span></div>
